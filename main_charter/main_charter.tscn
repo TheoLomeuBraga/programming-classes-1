@@ -1,0 +1,212 @@
+[gd_scene format=3 uid="uid://tqksyflb33s7"]
+
+[ext_resource type="PackedScene" uid="uid://bsx8jiiiluaoj" path="res://main_charter/main_charter.glb" id="1_12cjd"]
+[ext_resource type="AnimationLibrary" uid="uid://cvya0qndreyt4" path="res://main_charter/template_psx_charter.glb" id="2_e4pt4"]
+[ext_resource type="Script" uid="uid://cq4dl48ty6juf" path="res://main_charter/main_charter_model.gd" id="2_spmdf"]
+[ext_resource type="Texture2D" uid="uid://b0c031euyg47x" path="res://main_charter/main_charter_charter.png" id="3_a8kth"]
+
+[sub_resource type="Shader" id="Shader_a8kth"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.6.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx, unshaded;
+
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color, filter_nearest, repeat_enable;
+
+uniform float pallet_swap_precision : hint_range(0.0, 1.0, 0.01) = 0.1;
+
+uniform vec4 color_1 : source_color;
+uniform vec4 color_2 : source_color;
+uniform vec4 color_3 : source_color;
+uniform vec4 color_4 : source_color;
+uniform vec4 color_5 : source_color;
+uniform vec4 color_6 : source_color;
+
+vec3 swap_color(vec3 color){
+	
+	vec4 original_colors[6];
+	vec4 replace_colors[6] = vec4[6] (color_1,color_2,color_3,color_4,color_5,color_6);
+	for (int i = 0; i < 6; i ++) {
+		float clarity = (1.0 / 6.0) * float(i);
+		
+		original_colors[i] = vec4(clarity,clarity,clarity,1.0);
+		
+		if (distance(color, original_colors[i].xyz) <= pallet_swap_precision){
+			return replace_colors[i].xyz;
+		}
+	}
+}
+
+void fragment() {
+
+	vec4 albedo_tex = texture(texture_albedo, UV);
+	ALBEDO = swap_color(albedo.rgb * albedo_tex.rgb);
+	
+	
+	
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a8kth"]
+render_priority = 0
+shader = SubResource("Shader_a8kth")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("3_a8kth")
+shader_parameter/pallet_swap_precision = 0.0999999977648
+shader_parameter/color_1 = Color(1, 0, 0, 1)
+shader_parameter/color_2 = Color(7.219613e-08, 0.24062404, 0.31766456, 1)
+shader_parameter/color_3 = Color(0, 0, 0, 1)
+shader_parameter/color_4 = Color(0.0006878486, 0, 0.28959927, 1)
+shader_parameter/color_5 = Color(0, 0.78070253, 0.7807024, 1)
+shader_parameter/color_6 = Color(0.74623084, 0.52123845, 0.23905277, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_syhi2"]
+render_priority = 0
+shader = SubResource("Shader_a8kth")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("3_a8kth")
+shader_parameter/pallet_swap_precision = 0.0999999977648
+shader_parameter/color_1 = Color(1, 0, 0, 1)
+shader_parameter/color_2 = Color(0, 1, 0, 1)
+shader_parameter/color_3 = Color(0, 0, 1, 1)
+shader_parameter/color_4 = Color(1, 1, 0, 1)
+shader_parameter/color_5 = Color(0, 1, 1, 1)
+shader_parameter/color_6 = Color(1, 0, 1, 1)
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_spmdf"]
+graph_offset = Vector2(-312.42795, 93.92972)
+
+[node name="main_charter" unique_id=526971450 instance=ExtResource("1_12cjd")]
+script = ExtResource("2_spmdf")
+
+[node name="GeneralSkeleton" parent="metarig" parent_id_path=PackedInt32Array(1797607041) index="0" unique_id=1541277095]
+bones/0/position = Vector3(0, 1.0099, -0.05519999)
+bones/0/rotation = Quaternion(1.4901161e-08, 0, 0, 1)
+bones/4/rotation = Quaternion(-1.6763806e-08, 0, 0, 1)
+bones/5/rotation = Quaternion(-1.4901161e-08, 0, 0, 1)
+bones/6/rotation = Quaternion(-2.2351744e-08, 0, 0, 1)
+bones/8/rotation = Quaternion(-0.22438805, 0.7850605, -0.537421, -0.21097128)
+bones/9/rotation = Quaternion(0.5201475, -0.5669985, 0.33336174, 0.54482055)
+bones/10/rotation = Quaternion(-1.46683306e-08, 0.70710677, -1.46683306e-08, 0.70710677)
+bones/12/rotation = Quaternion(-0.4737383, 0.51645476, -0.49786022, -0.5108638)
+bones/13/rotation = Quaternion(-0.07165765, 0.7030117, 0.045925267, 0.706067)
+bones/14/rotation = Quaternion(0.06726885, -0.6982556, -0.06371857, 0.70982665)
+bones/17/rotation = Quaternion(2.5068541e-08, -6.258486e-07, 1, -3.871622e-09)
+bones/18/rotation = Quaternion(-6.482214e-17, 1, 1.8849967e-06, 9.119592e-17)
+bones/19/rotation = Quaternion(2.2800812e-15, 0.70710677, -0.70710677, 9.819372e-16)
+bones/22/rotation = Quaternion(1.8784318e-08, -6.258486e-07, 1, 3.7028132e-09)
+bones/23/rotation = Quaternion(2.6710978e-16, 1, 1.8849967e-06, 6.8192637e-16)
+bones/24/rotation = Quaternion(1.1150763e-15, 0.70710677, -0.70710677, 5.9914775e-16)
+
+[node name="spine_005" parent="metarig/GeneralSkeleton" index="0" unique_id=1605493533]
+transform = Transform3D(1, 0, 0, 0, 1, 3.3527613e-08, 0, -3.3527613e-08, 1, 0, 1.7196996, 0.01299992)
+
+[node name="Cube_011" parent="metarig/GeneralSkeleton/spine_005" index="1" unique_id=1438978359]
+surface_material_override/0 = SubResource("ShaderMaterial_a8kth")
+
+[node name="Cube_012" parent="metarig/GeneralSkeleton/spine_005" index="2" unique_id=1508919086]
+surface_material_override/0 = SubResource("ShaderMaterial_syhi2")
+
+[node name="spine_004" parent="metarig/GeneralSkeleton" index="1" unique_id=1975885962]
+transform = Transform3D(1, 0, 0, 0, 1, 3.7252903e-09, 0, -3.7252903e-09, 1, 0, 1.6581997, -0.011400014)
+
+[node name="Cube_010" parent="metarig/GeneralSkeleton/spine_004" index="0" unique_id=1518062597]
+surface_material_override/0 = SubResource("ShaderMaterial_a8kth")
+
+[node name="hand_L" parent="metarig/GeneralSkeleton" index="2" unique_id=1357546994]
+transform = Transform3D(0.09711501, 0.018646497, -0.9950985, -0.6140036, -0.7857655, -0.074646816, -0.783306, 0.6182433, -0.064860605, 0.26974225, 1.2301142, -0.04919043)
+
+[node name="Cube_005" parent="metarig/GeneralSkeleton/hand_L" index="0" unique_id=1561492714]
+surface_material_override/0 = SubResource("ShaderMaterial_a8kth")
+
+[node name="forearm_L" parent="metarig/GeneralSkeleton" index="3" unique_id=1254415094]
+transform = Transform3D(-0.9950985, 0.018646494, -0.09711501, -0.074646816, -0.7857655, 0.61400366, -0.064860605, 0.61824334, 0.783306, 0.283988, 1.4109783, -0.2393687)
+
+[node name="Cube_003" parent="metarig/GeneralSkeleton/forearm_L" index="0" unique_id=1835747515]
+surface_material_override/0 = SubResource("ShaderMaterial_a8kth")
+
+[node name="upper_arm_L" parent="metarig/GeneralSkeleton" index="4" unique_id=2124752089]
+transform = Transform3D(-0.12555557, 0.32165754, -0.9384946, 0.57243204, -0.749137, -0.3333398, -0.81028223, -0.57907706, -0.090068735, 0.1953, 1.5845996, -0.026700005)
+
+[node name="Cube_004" parent="metarig/GeneralSkeleton/upper_arm_L" index="0" unique_id=561745471]
+surface_material_override/0 = SubResource("ShaderMaterial_a8kth")
+
+[node name="hand_R" parent="metarig/GeneralSkeleton" index="5" unique_id=835844128]
+transform = Transform3D(-0.02698932, -0.0879625, 0.99575824, 0.9995927, -0.011631712, 0.026065728, 0.009289712, 0.99605596, 0.08824068, -0.22451371, 1.5020654, 0.51474625)
+
+[node name="Cube_018" parent="metarig/GeneralSkeleton/hand_R" index="0" unique_id=1671189736]
+surface_material_override/0 = SubResource("ShaderMaterial_a8kth")
+
+[node name="forearm_R" parent="metarig/GeneralSkeleton" index="6" unique_id=175142341]
+transform = Transform3D(-0.99575824, -0.08796244, -0.026989343, -0.009270179, -0.1959267, 0.9805749, -0.09154175, 0.9766655, 0.1942803, -0.21590981, 1.5142154, 0.25233263)
+
+[node name="Cube_016" parent="metarig/GeneralSkeleton/forearm_R" index="0" unique_id=9046646]
+surface_material_override/0 = SubResource("ShaderMaterial_a8kth")
+
+[node name="upper_arm_R" parent="metarig/GeneralSkeleton" index="7" unique_id=1270855512]
+transform = Transform3D(-0.019348681, -0.05541444, 0.99827605, 0.99938697, -0.030213088, 0.01769304, 0.029180676, 0.9980063, 0.055965126, -0.1953, 1.5845996, -0.026700005)
+
+[node name="Cube_017" parent="metarig/GeneralSkeleton/upper_arm_R" index="0" unique_id=700440170]
+surface_material_override/0 = SubResource("ShaderMaterial_a8kth")
+
+[node name="spine_003" parent="metarig/GeneralSkeleton" index="8" unique_id=2703222]
+transform = Transform3D(1, 0, 0, 0, 1, -2.9802322e-08, 0, 2.9802322e-08, 1, 0, 1.4656998, -0.0059000105)
+
+[node name="Cube_009" parent="metarig/GeneralSkeleton/spine_003" index="0" unique_id=1462298981]
+surface_material_override/0 = SubResource("ShaderMaterial_a8kth")
+
+[node name="spine_001" parent="metarig/GeneralSkeleton" index="9" unique_id=1583636236]
+transform = Transform3D(1, 0, 0, 0, 1, -2.9802322e-08, 0, 2.9802322e-08, 1, 0, 1.1573, -0.017199997)
+
+[node name="Cube_008" parent="metarig/GeneralSkeleton/spine_001" index="0" unique_id=432502830]
+surface_material_override/0 = SubResource("ShaderMaterial_a8kth")
+
+[node name="foot_L" parent="metarig/GeneralSkeleton" index="10" unique_id=1433869660]
+transform = Transform3D(-1, 5.013706e-08, -7.743404e-09, -7.743279e-09, 2.488494e-06, 1, 5.0137082e-08, 1, -2.488494e-06, 0.098, 0.08520001, -0.016198993)
+
+[node name="Cube_001" parent="metarig/GeneralSkeleton/foot_L" index="0" unique_id=2116791369]
+surface_material_override/0 = SubResource("ShaderMaterial_a8kth")
+
+[node name="shin_L" parent="metarig/GeneralSkeleton" index="11" unique_id=1795393450]
+transform = Transform3D(1, 7.743402e-09, -5.0137057e-08, 7.743277e-09, -1, -2.488494e-06, -5.013708e-08, 2.488494e-06, -1, 0.098000005, 0.5371999, 0.028599638)
+
+[node name="Cube" parent="metarig/GeneralSkeleton/shin_L" index="0" unique_id=967787926]
+surface_material_override/0 = SubResource("ShaderMaterial_a8kth")
+
+[node name="thigh_L" parent="metarig/GeneralSkeleton" index="12" unique_id=914251543]
+transform = Transform3D(-1, 7.743213e-09, 5.0137086e-08, -7.743277e-09, -1, -1.2814995e-06, 5.013708e-08, -1.2814995e-06, 1, 0.098, 1.072, -0.012399979)
+
+[node name="Cube_002" parent="metarig/GeneralSkeleton/thigh_L" index="0" unique_id=476876171]
+surface_material_override/0 = SubResource("ShaderMaterial_a8kth")
+
+[node name="foot_R" parent="metarig/GeneralSkeleton" index="13" unique_id=2016104229]
+transform = Transform3D(-1, 3.7568665e-08, 7.4055078e-09, 7.405601e-09, 2.488494e-06, 1, 3.7568643e-08, 1, -2.488494e-06, -0.098, 0.08520001, -0.016198993)
+
+[node name="Cube_014" parent="metarig/GeneralSkeleton/foot_R" index="0" unique_id=2115490543]
+surface_material_override/0 = SubResource("ShaderMaterial_a8kth")
+
+[node name="shin_R" parent="metarig/GeneralSkeleton" index="14" unique_id=1348678314]
+transform = Transform3D(1, -7.4055087e-09, -3.756866e-08, -7.405602e-09, -1, -2.488494e-06, -3.756864e-08, 2.488494e-06, -1, -0.098, 0.5371999, 0.028599638)
+
+[node name="Cube_013" parent="metarig/GeneralSkeleton/shin_R" index="0" unique_id=1201626991]
+surface_material_override/0 = SubResource("ShaderMaterial_a8kth")
+
+[node name="thigh_R" parent="metarig/GeneralSkeleton" index="15" unique_id=995889730]
+transform = Transform3D(-1, -7.40565e-09, 3.7568633e-08, 7.4056015e-09, -1, -1.2814995e-06, 3.756864e-08, -1.2814995e-06, 1, -0.098, 1.072, -0.012399979)
+
+[node name="Cube_015" parent="metarig/GeneralSkeleton/thigh_R" index="0" unique_id=372369224]
+surface_material_override/0 = SubResource("ShaderMaterial_a8kth")
+
+[node name="spine" parent="metarig/GeneralSkeleton" index="16" unique_id=1847467806]
+transform = Transform3D(1, 0, 0, 0, 1, -2.9802322e-08, 0, 2.9802322e-08, 1, 0, 1.0099, -0.05519999)
+
+[node name="Cube_007" parent="metarig/GeneralSkeleton/spine" index="0" unique_id=263690763]
+surface_material_override/0 = SubResource("ShaderMaterial_a8kth")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="metarig" parent_id_path=PackedInt32Array(1797607041) index="1" unique_id=2124494970]
+libraries/template_psx_charter = ExtResource("2_e4pt4")
+
+[node name="AnimationTree" type="AnimationTree" parent="metarig" parent_id_path=PackedInt32Array(1797607041) index="2" unique_id=1723731500]
+tree_root = SubResource("AnimationNodeBlendTree_spmdf")
+anim_player = NodePath("../AnimationPlayer")
