@@ -49,8 +49,20 @@ enum AnimationMode {FLOOR,AIR}
 
 @export var shoot : bool
 
+var rot_tween : Tween
+enum Direction {LEFT,RIGHT}
+@export var direction : Direction = Direction.RIGHT :
+	set(value):
+		direction = value
+		rot_tween = create_tween()
+		if direction == Direction.LEFT:
+			rot_tween.tween_property($metarig,"rotation",Vector3(0.0,PI/2.0,0.0),0.2)
+		elif direction == Direction.RIGHT:
+			rot_tween.tween_property($metarig,"rotation",Vector3(0.0,-PI/2.0,0.0),0.2)
+		
+		rot_tween.set_trans(Tween.TRANS_SINE)
+
+
+
 func _ready() -> void:
 	update_color_pallet()
-
-func _process(delta: float) -> void:
-	pass
