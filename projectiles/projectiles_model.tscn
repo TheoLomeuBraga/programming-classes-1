@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bupjxwif7adqe"]
+
+[ext_resource type="PackedScene" uid="uid://c8vhddebvai27" path="res://projectiles/projectiles_model.glb" id="1_k5rge"]
+[ext_resource type="Script" uid="uid://dlsj5wtbo8rsc" path="res://projectiles/projectiles_model.gd" id="2_pc2t3"]
+
+[node name="projectiles_model" unique_id=919287373 instance=ExtResource("1_k5rge")]
+script = ExtResource("2_pc2t3")
+
+[node name="Cylinder" parent="." index="1" unique_id=235786730]
+visible = false
+
+[node name="Cube_001" parent="." index="2" unique_id=1728503240]
+visible = false
