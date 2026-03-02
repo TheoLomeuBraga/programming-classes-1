@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://c6ybhrtyupx00"]
+
+[ext_resource type="PackedScene" uid="uid://d1d7llfnihs43" path="res://tiles/tiles.glb" id="1_bh13l"]
+
+[node name="tiles" unique_id=1803107827 instance=ExtResource("1_bh13l")]

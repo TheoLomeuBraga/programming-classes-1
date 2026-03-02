@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://ckjlqk77qxr1u"]
+
+[ext_resource type="MeshLibrary" uid="uid://byodtwy8sjbrt" path="res://tiles/tiles_library.meshlib" id="1_ml5ei"]
+
+[node name="Tiles3dTest" type="Node3D" unique_id=853446415]
+
+[node name="GridMap" type="GridMap" parent="." unique_id=293236254]
+mesh_library = ExtResource("1_ml5ei")
+cell_size = Vector3(1, 1, 1)
+metadata/_editor_floor_ = Vector3(0, 0, 0)
